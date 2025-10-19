@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,11 +15,17 @@ public class IDGeneratorController {
 
     @PostMapping("/ids")
     public ResponseEntity<Map<String, Object>> processIds() {
-        // Generate and return a new UUID
         String uuid = UUID.randomUUID().toString();
+        String hostname;
+        try {
+            hostname = InetAddress.getLocalHost().getHostName();
+        } catch (Exception e) {
+            hostname = "unknown";
+        }
         return ResponseEntity.ok(Map.of(
             "uuid", uuid,
-            "timestamp", System.currentTimeMillis()
+            "timestamp", System.currentTimeMillis(),
+            "hostname", hostname
         ));
     }
 }
