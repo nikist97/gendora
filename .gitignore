@@ -6,3 +6,6 @@ build
 
 # Intelij IDEA project files
 .idea
+
+# k6 output files
+load-testing/output
