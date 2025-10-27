@@ -41,7 +41,7 @@ class GeneratorControllerIntegrationTest {
 
         Map<String, Object> metadata = (Map<String, Object>) response.getBody().get("metadata");
         assertThat(metadata.get("timestampDelta")).isNotNull();
-        assertThat(metadata.get("epoch")).isEqualTo(1759276800000L);
+        assertThat(metadata.get("epoch")).isEqualTo("1759276800000");
         assertThat((Integer) metadata.get("machineID")).isBetween(0, 1023);
         assertThat(metadata.get("sequenceID")).isNotNull();
         assertThat(metadata.get("algorithm")).isEqualTo("snowflake");

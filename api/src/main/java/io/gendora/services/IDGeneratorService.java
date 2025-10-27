@@ -71,8 +71,8 @@ public class IDGeneratorService {
         long timestampDelta = (id >> TIMESTAMP_SHIFT) & MAX_TIMESTAMP_DELTA;
 
         return ImmutableMap.of(
-                "timestampDelta", timestampDelta,
-                "epoch", EPOCH,
+                "timestampDelta", Long.toString(timestampDelta),
+                "epoch", Long.toString(EPOCH),
                 "machineID", machineId,
                 "sequenceID", sequenceID,
                 "algorithm", "snowflake"
