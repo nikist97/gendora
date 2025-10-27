@@ -52,11 +52,7 @@ export default function () {
     if (validationCheck) {
       const id = body.id;
 
-      console.log(
-        `[VU: ${__VU}, Iter: ${__ITER}] ID: ${id}, Metadata: ${JSON.stringify(
-          body.metadata
-        )}`
-      );
+      console.log(`[VU: ${__VU}, Iter: ${__ITER}] ID: ${id}`);
 
       if (localIds.has(id)) {
         console.error(
