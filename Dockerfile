@@ -34,4 +34,7 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:8080/api/actuator/health || exit 1
 
-ENTRYPOINT ["java", "-jar", "gendora.jar"]
+ENTRYPOINT ["java", \
+    "-Xmx1024m", \
+    "-Xms512m", \
+    "-jar", "gendora.jar"]

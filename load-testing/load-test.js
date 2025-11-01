@@ -10,14 +10,7 @@ const localIds = new Set();
 export const options = {
   stages: [
     { duration: "15s", target: 100 },
-    { duration: "30s", target: 200 },
-    { duration: "30s", target: 300 },
-    { duration: "30s", target: 400 },
-    { duration: "30s", target: 500 },
-    { duration: "30s", target: 400 },
-    { duration: "30s", target: 300 },
-    { duration: "30s", target: 200 },
-    { duration: "30s", target: 100 },
+    { duration: "300s", target: 500 },
     { duration: "15s", target: 0 },
   ],
   thresholds: {
@@ -82,10 +75,7 @@ Average Response Time: ${data.metrics.http_req_duration.values.avg.toFixed(2)}ms
 P95 Response Time: ${data.metrics.http_req_duration.values["p(95)"].toFixed(
       2
     )}ms
-P99 Response Time: ${data.metrics.http_req_duration.values["p(99)"].toFixed(
-      2
-    )}ms
-
+Max Response Time: ${data.metrics.http_req_duration.values.max.toFixed(2)}ms
 Note: Due to k6's per-VU isolation, cross-VU duplicate detection requires post-test analysis.
 === Result: ${
       errorRate < 0.001 && successRate > 0.999 ? "PASS ✓" : "FAIL ✗"
