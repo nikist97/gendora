@@ -21,7 +21,6 @@ dependencies {
     implementation libs.lettuce.core
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -32,29 +31,20 @@ application {
     mainClass = 'io.gendora.App'
 }
 
-// Configure the default test task for unit tests only
 tasks.named('test') {
     useJUnitPlatform()
-    // Exclude integration tests from the default test task
     exclude '**/*IntegrationTest.class'
-    // Add a description for clarity
     description = 'Runs unit tests only (excludes integration tests)'
 }
 
-// Create a separate task for integration tests
 task integrationTest(type: Test) {
     useJUnitPlatform()
-    // Only include integration tests
     include '**/*IntegrationTest.class'
-    // Set description
     description = 'Runs integration tests only'
-    // Integration tests typically take longer, so we can configure them differently
     maxParallelForks = 1
-    // Ensure integration tests run after unit tests
     shouldRunAfter test
 }
 
-// Create a task that runs all tests (unit + integration)
 task allTests(type: Test) {
     useJUnitPlatform()
     description = 'Runs all tests (unit tests + integration tests)'

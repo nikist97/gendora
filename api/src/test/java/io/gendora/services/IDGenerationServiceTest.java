@@ -79,7 +79,7 @@ class IDGenerationServiceTest {
 
         // Then
         assertTrue(metadata.containsKey("timestampDelta"));
-        assertEquals("1759276800000", metadata.get("epoch"));
+        assertEquals("1761955200000", metadata.get("epoch"));
         assertEquals(0L, metadata.get("machineID"));
         assertEquals(0L, metadata.get("sequenceID"));
         assertEquals("snowflake", metadata.get("algorithm"));

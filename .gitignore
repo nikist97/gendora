@@ -9,3 +9,6 @@ build
 
 # k6 output files
 load-testing/output
+
+# VS Code files
+.vscode

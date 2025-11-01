@@ -9,12 +9,12 @@ import java.util.Map;
 
 @Service
 public class IDGeneratorService {
-    private static final long EPOCH = 1759276800000L; // 2025-10-01 00:00:00 UTC
+    private static final long EPOCH = 1761955200000L; // 2025-11-01 00:00:00 GMT +0000
     
-    // Bit layout: [Sign: 1 bit] [Timestamp (since epoch): 41 bits] [MachineID: 10 bits] [Sequence: 12 bits]
-    private static final long TIMESTAMP_BITS = 41;
+    // Bit layout: [Sign: 1 bit] [Timestamp (since epoch): 43 bits] [MachineID: 10 bits] [Sequence: 10 bits]
+    private static final long TIMESTAMP_BITS = 43;
     private static final long MACHINE_ID_BITS = 10;
-    private static final long SEQUENCE_BITS = 12;
+    private static final long SEQUENCE_BITS = 10;
     
     private static final long SEQUENCE_SHIFT = 0;
     private static final long MACHINE_ID_SHIFT = SEQUENCE_BITS;
