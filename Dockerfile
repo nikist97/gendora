@@ -11,10 +11,10 @@ COPY settings.gradle settings.gradle
 COPY gradle.properties gradle.properties
 
 # Copy the API source code
-COPY api/ api/
+COPY gendora-api/ gendora-api/
 
 # Build the application
-RUN cd api && ../gradlew build -x test
+RUN cd gendora-api && ../gradlew build -x test
 
 # Runtime stage
 FROM openjdk:21-slim
@@ -25,7 +25,7 @@ RUN groupadd -r gendora && useradd -r -g gendora gendora
 
 WORKDIR /gendora
 
-COPY --from=builder /gendora/api/build/libs/*.jar gendora.jar
+COPY --from=builder /gendora/gendora-api/build/libs/*.jar gendora.jar
 
 USER gendora
 
