@@ -1,5 +1,6 @@
 package io.gendora.services;
 
+import io.lettuce.core.SetArgs;
 import io.lettuce.core.api.sync.RedisCommands;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -83,11 +84,17 @@ public class SlotAllocatorService {
         for (int slot = 0; slot < MAX_SLOTS; slot++) {
             String slotKey = getSlotKey(slot);
             
-            Boolean claimed = redis.setnx(slotKey, instanceID);
-            if (Boolean.TRUE.equals(claimed)) {
-                redis.expire(slotKey, SLOT_TTL.toSeconds());
+            // Atomically claim slot and set expiration using SET with NX and EX options - atomic single command
+            String result = redis.set(
+                slotKey,
+                instanceID,
+                SetArgs.Builder.nx().ex(SLOT_TTL.toSeconds())
+            );
+            
+            // Returns "OK" if key was set (didn't exist), null if key already exists
+            if ("OK".equals(result)) {
                 this.allocatedSlot = slot;
-                logger.info("Successfully claimed slot {}", slot);
+                logger.info("Successfully claimed slot {} for instance {}", slot, instanceID);
                 return;
             }
         }
